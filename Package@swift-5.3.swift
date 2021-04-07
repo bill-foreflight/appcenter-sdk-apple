@@ -28,7 +28,7 @@ let package = Package(
             targets: ["AppCenterDistribute"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/bill-foreflight/plcrashreporter.git", .revision("09344c9efd52a6b80f6b44273a6601a01d7b1435")),
+        .package(name: "PLCrashReporter", url: "https://github.com/bill-foreflight/plcrashreporter.git", .revision("09344c9efd52a6b80f6b44273a6601a01d7b1435")),
     ],
     targets: [
         .target(
