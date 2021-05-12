@@ -9,7 +9,7 @@ let package = Package(
     name: "AppCenter",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v9),
+        .iOS(.v13),
         .macOS(.v10_10),
         .tvOS(.v11)
     ],
@@ -29,10 +29,19 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "PLCrashReporter", url: "https://github.com/bill-foreflight/plcrashreporter.git", .revision("09344c9efd52a6b80f6b44273a6601a01d7b1435")),
+        .package(
+            name: "SpatialiteSqlite3Proj",
+            url: "git@github.com:foreflight/ffm-spatialite-sqlite-proj.git",
+            .upToNextMinor(from: "1.0.5")
+        )
+
     ],
     targets: [
         .target(
             name: "AppCenter",
+            dependencies: [
+                .product(name: "CSQLite3", package: "SpatialiteSqlite3Proj")
+            ],
             path: "AppCenter/AppCenter",
             exclude: ["Support"],
             cSettings: [
@@ -42,7 +51,6 @@ let package = Package(
             ],
             linkerSettings: [
                 .linkedLibrary("z"),
-                .linkedLibrary("sqlite3"),
                 .linkedFramework("Foundation"),
                 .linkedFramework("SystemConfiguration"),
                 .linkedFramework("AppKit", .when(platforms: [.macOS])),
